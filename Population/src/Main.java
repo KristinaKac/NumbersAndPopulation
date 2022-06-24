@@ -21,18 +21,17 @@ public class Main {
         System.out.println(stream1.count());
 
         List<String> stream2 = persons.stream()
-                .filter(x -> x.getAge() > 18 && x.getAge() < 27)
+                .filter(x -> x.getAge() >= 18 && x.getAge() < 27)
                 .filter(x -> x.getSex().equals(Sex.MAN))
                 .map(Person::getFamily)
                 .collect((Collectors.toList()));
         System.out.println(stream2);
 
-        List<String> stream3 = persons.stream()
+        List<Person> stream3 = persons.stream()
                 .filter(x -> x.getEducation().equals(Education.HIGHER))
-                .filter(x -> x.getSex().equals(Sex.WOMAN) && x.getAge() > 18 && x.getAge() < 60)
-                .filter(x -> x.getSex().equals(Sex.MAN) && x.getAge() > 18 && x.getAge() < 65)
+                .filter(x -> x.getSex().equals(Sex.WOMAN) && x.getAge() >= 18 && x.getAge() < 60 ||
+                        x.getSex().equals(Sex.MAN) && x.getAge() >= 18 && x.getAge() < 65)
                 .sorted(Comparator.comparing(Person::getFamily))
-                .map(Person::getFamily)
                 .collect(Collectors.toList());
         System.out.println(stream3);
     }
